@@ -281,3 +281,34 @@ You have six routers. R1 has a default route to R2. R2 has a specific route to t
 - A. Yes, every router must have a default route.
 - B. No, R2 can use its specific matching route. Correct
 - C. Yes, because R1 used a default route.
+
+# 2. Let's say a packet arrives for 192.168.1.50
+R1 checks its routing table:
+Route A: 192.168.1.0/24
+Most specific
+
+Matches 192.168.1.50 because it belongs to this network.
+
+
+Route B: 192.168.0.0/16
+
+Also matches 192.168.1.50 because this larger network includes the address.
+
+
+Route C: 0.0.0.0/0
+
+Also matches 192.168.1.50 because it matches any IPv4 address.
+
+
+Which route does R1 use? Route A, 192.168.1.0/24, because it has the longest matching prefix.
+
+Even though all three routes match, R1 chooses the most specific one.
+3. What if the destination is 192.168.5.20?
+- 192.168.1.0/24 — does not match.
+- 192.168.0.0/16 — matches.
+- 0.0.0.0/0 — matches.
+R1 uses 192.168.0.0/16, because /16 is more specific than /0.
+
+If the destination were 8.8.8.8, neither of the first two routes would match, so R1 would use the default route.
+Remember this for your CCNA
+Longest prefix match wins. The default route is the least specific IPv4 route, used as a fallback when no more specific matching route is available.

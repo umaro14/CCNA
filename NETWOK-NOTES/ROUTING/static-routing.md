@@ -50,3 +50,21 @@ Here’s a clearer diagram showing the full journey from PC1 to PC4, with the MA
 Every router-to-router link uses the MAC addresses of the two interfaces connected to that link. The IP addresses stay the same throughout normal routing, but the MAC addresses change at each hop.
 
 
+# no ip route 192.168.2.0 255.255.255.0 192.168.3.2
+this "no" command will undo this configuraion
+
+# do sh runninig-config | include ip route
+this will show the all comands where "ip route was involved"
+
+
+# Gateway of last resort
+“Gateway of last resort” is the next hop a router uses when no other route matches the destination. It’s simply the default route’s next hop, shown at the top of show ip route so you can see it straight away.
+
+The two ways it can appear
+Not set: Gateway of last resort is not set
+
+The router has no default route. If a packet’s destination doesn’t match any route in the table, the router drops it.
+
+Set:
+
+Gateway of last resort is 172.16.1.1 to network 0.0.0.0

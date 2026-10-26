@@ -1,0 +1,16 @@
+It’s in a new static-routing-labs folder inside your project folder.
+
+It has 11 sections:
+
+Overview: what hub and spoke is.
+Goal: every PC reaches the HQ server and every other branch, with as few routes as possible.
+Topology: a text diagram of all the devices, interfaces and networks.
+Devices: the Packet Tracer models, how to add the HWIC-2T modules, and which cable to use.
+IP addressing: a networks table and a full interface table.
+Routing design: default routes on the branches, static routes on HQ, and a step-by-step branch-to-branch example.
+Configuration: the full config for R-HQ and all 4 branch routers.
+Verification: the commands to run and what each should show.
+Troubleshooting: the problems you ran into, like Console/AUX ports and the “it’s this router” error, with their fixes.
+Why companies use it: cost, central services, simple management and security, plus the trade-offs.
+Key takeaways: the 5 main rules from the lab.
+The README uses the diagram names (R-HQ, R-BR1 and so on), but your Packet Tracer file uses the defaults (Router5, Router0 and so on). If you rename the devices to match, your screenshots and the README will line up.

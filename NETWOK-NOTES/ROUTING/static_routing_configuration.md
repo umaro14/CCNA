@@ -1,3 +1,255 @@
+# LAB DAY 11 GERREMY
+
+
+# Router 1
+Router>EN
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#hostname R1
+
+	
+R1(config)#int g0/1
+R1(config-if)#ip address 192.168.1.254 255.255.255.0
+R1(config-if)#desc ## to SW1 ##
+R1(config-if)#
+R1(config-if)#no shut
+
+R1(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to up
+
+R1(config-if)#
+R1(config-if)#
+R1(config-if)#int g0/0
+R1(config-if)#ip address 192.168.12.1 255.255.255.0
+R1(config-if)#desc ## to R2 ##
+R1(config-if)#no shut
+
+R1(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0, changed state to up
+
+R1(config-if)#
+R1(config-if)#do sh ip int br
+Interface              IP-Address      OK? Method Status                Protocol 
+GigabitEthernet0/0     192.168.12.1    YES manual up                    down 
+GigabitEthernet0/1     192.168.1.254   YES manual up                    up 
+GigabitEthernet0/2     unassigned      YES unset  administratively down down 
+Vlan1                  unassigned      YES unset  administratively down down
+R1(config-if)#
+R1(config-if)#
+R1(config-if)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0, changed state to up
+
+# Router 2
+Router>EN
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#hostname R1
+R1(config)#int go/1
+                ^
+% Invalid input detected at '^' marker.
+	
+R1(config)#int g0/1
+R1(config-if)#ip address 192.168.1.254 255.255.255.0
+R1(config-if)#desc ## to SW1 ##
+R1(config-if)#
+R1(config-if)#no shut
+
+R1(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to up
+
+R1(config-if)#
+R1(config-if)#
+R1(config-if)#int g0/0
+R1(config-if)#ip address 192.168.12.1 255.255.255.0
+R1(config-if)#desc ## to R2 ##
+R1(config-if)#no shut
+
+R1(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0, changed state to up
+
+R1(config-if)#
+R1(config-if)#do sh ip int br
+Interface              IP-Address      OK? Method Status                Protocol 
+GigabitEthernet0/0     192.168.12.1    YES manual up                    down 
+GigabitEthernet0/1     192.168.1.254   YES manual up                    up 
+GigabitEthernet0/2     unassigned      YES unset  administratively down down 
+Vlan1                  unassigned      YES unset  administratively down down
+R1(config-if)#
+R1(config-if)#
+R1(config-if)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0, changed state to up
+
+
+
+# Router 3
+Router>EN
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#hostname R1
+R1(config)#int go/1
+                ^
+% Invalid input detected at '^' marker.
+	
+R1(config)#int g0/1
+R1(config-if)#ip address 192.168.1.254 255.255.255.0
+R1(config-if)#desc ## to SW1 ##
+R1(config-if)#
+R1(config-if)#no shut
+
+R1(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to up
+
+R1(config-if)#
+R1(config-if)#
+R1(config-if)#int g0/0
+R1(config-if)#ip address 192.168.12.1 255.255.255.0
+R1(config-if)#desc ## to R2 ##
+R1(config-if)#no shut
+
+R1(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0, changed state to up
+
+R1(config-if)#
+R1(config-if)#do sh ip int br
+Interface              IP-Address      OK? Method Status                Protocol 
+GigabitEthernet0/0     192.168.12.1    YES manual up                    down 
+GigabitEthernet0/1     192.168.1.254   YES manual up                    up 
+GigabitEthernet0/2     unassigned      YES unset  administratively down down 
+Vlan1                  unassigned      YES unset  administratively down down
+R1(config-if)#
+R1(config-if)#
+R1(config-if)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0, changed state to up
+
+# NOTE (IMPORTANT):
+# so a default gateway of a pc is the ip address of its connected router ?
+
+Yes, exactly! ✅ In most networks, a PC's default gateway is the IP address of the router's interface connected to the same local network as the PC.
+
+Let's look at an example.
+
+#        PC1
+# IP: 192.168.1.10
+# Mask: 255.255.255.0
+# Gateway: 192.168.1.1
+----------------------
+          ↓↑
+#       Router R1
+#     Interface G0/0
+#     192.168.1.1/24          
+
+
+# Notice that the PC's default gateway, 192.168.1.1, matches the router's G0/0 interface IP address.
+
+# Why does the PC need a default gateway?
+- Communication within the same network: PC1 can communicate directly with another device in 192.168.1.0/24, using its MAC address to send frames.
+- Communication with a different network: PC1 sends the traffic to its default gateway, which routes it towards the destination.
+For example, if PC1 wants to communicate with 8.8.8.8, it sends the packet to its default gateway, 192.168.1.1, and the router forwards it towards the destination.
+
+# Remember for your CCNA:
+
+The default gateway is the IP address of the local router interface that the PC uses to reach destinations outside its own subnet. It is not the router's public IP address or the IP address of a remote router.
+----------------------------------------------------------------
+
+# configuring staic route with hops
+![alt text](image-14.png)
+
+# Data flowing between PC1 <-> PC2
+# 3 Routers = PC1 <-> R1 <-> R2 <-> R3 <-> PC2
+
+# R1
+R1(config)#ip route 192.168.3.0 255.255.255.0 192.168.12.2
+R1(config)#
+R1(config)#
+R1(config)#do sh ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     192.168.1.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.1.0/24 is directly connected, GigabitEthernet0/1
+L       192.168.1.254/32 is directly connected, GigabitEthernet0/1
+# S    192.168.3.0/24 [1/0] via 192.168.12.2
+     192.168.12.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.12.0/24 is directly connected, GigabitEthernet0/0
+L       192.168.12.1/32 is directly connected, GigabitEthernet0/0
+
+R1(config)#
+
+# R2
+R2(config)#ip route 192.168.1.0 255.255.255.0 g0/0
+%Default route without gateway, if not a point-to-point interface, may impact performance
+R2(config)#
+R2(config)#
+R2(config)#ip route 192.168.3.0 255.255.255.0 192.168.13.3
+R2(config)#
+R2(config)#do sh ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+S    192.168.1.0/24 is directly connected, GigabitEthernet0/0
+S    192.168.3.0/24 [1/0] via 192.168.13.3
+     192.168.12.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.12.0/24 is directly connected, GigabitEthernet0/0
+L       192.168.12.2/32 is directly connected, GigabitEthernet0/0
+     192.168.13.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.13.0/24 is directly connected, GigabitEthernet0/1
+L       192.168.13.2/32 is directly connected, GigabitEthernet0/1
+
+R2(config)#
+
+
+# R3
+R3>en
+R3#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R3(config)#
+R3(config)#
+R3(config)#ip route 192.168.1.0 255.255.255.0 192.168.13.2
+R3(config)#
+R3(config)#
+R3(config)#do sh ip route
+Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+S    192.168.1.0/24 [1/0] via 192.168.13.2
+     192.168.3.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.3.0/24 is directly connected, GigabitEthernet0/1
+L       192.168.3.254/32 is directly connected, GigabitEthernet0/1
+     192.168.13.0/24 is variably subnetted, 2 subnets, 2 masks
+C       192.168.13.0/24 is directly connected, GigabitEthernet0/0
+L       192.168.13.3/32 is directly connected, GigabitEthernet0/0
+
+R3(config)#
+
+----------------------------------------------------------------
+
 # pc1 wants to reach pc4 using static routing
 
 Path chosen: PC1 → R1 → R3 → R4 → PC4 (the top route). R2 could carry the traffic instead, but this example doesn’t use it.
@@ -12,14 +264,14 @@ Routing has to work in both directions. The ping only succeeds if the reply can 
 
 # Configuration needed
 
-! PC1 default gateway: 192.168.1.1   
-PC4 default gateway: 192.168.4.4
+# ! PC1 default gateway: 192.168.1.1   
+# PC4 default gateway: 192.168.4.4
 
-R1(config)# ip route 192.168.4.0 255.255.255.0 192.168.13.3 (R3 ip)
-R3(config)# ip route 192.168.4.0 255.255.255.0 192.168.34.4
+# R1(config)# ip route 192.168.4.0 255.255.255.0 192.168.13.3 (R3 ip)
+# R3(config)# ip route 192.168.4.0 255.255.255.0 192.168.34.4
 
-R3(config)# ip route 192.168.1.0 255.255.255.0 192.168.13.1
-R4(config)# ip route 192.168.1.0 255.255.255.0 192.168.34.3
+# R3(config)# ip route 192.168.1.0 255.255.255.0 192.168.13.1
+# R4(config)# ip route 192.168.1.0 255.255.255.0 192.168.34.3
 
 # FORMAT
 ip route  192.168.4.0   255.255.255.0   192.168.13.3
